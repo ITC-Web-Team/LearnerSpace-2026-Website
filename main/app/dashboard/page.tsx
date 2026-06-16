@@ -8,19 +8,19 @@ const weekCards = [1, 2, 3, 4] as const;
 const weekResources = {
   1: {
     title: "Week 1 Resources",
-    link: "https://example.com/week1",
+    link: "https://github.com/ITC-Web-Team/LearnerSpace-2026/tree/main/Week1",
   },
   2: {
     title: "Week 2 Resources",
-    link: "https://example.com/week2",
+    link: "/",
   },
   3: {
     title: "Week 3 Resources",
-    link: "https://example.com/week3",
+    link: "/",
   },
   4: {
     title: "Week 4 Resources",
-    link: "https://example.com/week4",
+    link: "/",
   },
 } as const;
 function getWeekStatus(submission: Awaited<ReturnType<typeof prisma.submission.findUnique>>, week: 1 | 2 | 3 | 4) {
@@ -94,7 +94,7 @@ export default async function DashboardPage() {
     href={weekResources[week].link}
     target="_blank"
     rel="noopener noreferrer"
-    className="rounded-full bg-[#3d3427] px-4 py-2 text-sm font-medium text-[#f7f0e1] hover:bg-[#554530]"
+    className="rounded-full bg-[#ffffff] px-4 py-2 text-sm font-medium text-[#f7f0e1] hover:bg-[#e4bd8a]"
   >
     Open Resources
   </a>
