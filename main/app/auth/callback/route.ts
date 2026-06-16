@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createSessionToken, sessionCookieName } from "@/lib/session";
 import { fetchSsoUser } from "@/lib/sso";
-console.log("CALLBACK URL:", request.url);
 export async function GET(request: NextRequest) {
   const accessId = request.nextUrl.searchParams.get("accessid");
 
