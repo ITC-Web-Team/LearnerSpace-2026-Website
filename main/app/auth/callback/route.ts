@@ -60,13 +60,13 @@ export async function GET(request: NextRequest) {
   new URL("/dashboard", baseUrl).toString()
 )
     const response = NextResponse.redirect(
-      new URL("/dashboard", baseUrl)
-    );
+  "http://webteam-ls.tech-iitb.org/dashboard"
+);
 
     response.cookies.set(sessionCookieName(), sessionToken, {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
     });
