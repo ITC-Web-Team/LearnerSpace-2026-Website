@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String        @id @default(cuid())
+  name        String
+  rollNo      String        @unique
+  branch      String
+  isVerified  Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  submissions Submission[]
+}
+
+model Submission {
+  id             String   @id @default(cuid())
+  rollNo         String   @unique
+  name           String
+  repositoryLink String?
+  week1Verified  Boolean  @default(false)
+  week2Verified  Boolean  @default(false)
+  week3Verified  Boolean  @default(false)
+  week4Verified  Boolean  @default(false)
+  finalVerified  Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [rollNo], references: [rollNo], onDelete: Cascade)
+
+}
