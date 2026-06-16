@@ -2,17 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createSessionToken, sessionCookieName } from "@/lib/session";
 import { fetchSsoUser } from "@/lib/sso";
+
 export async function GET(request: NextRequest) {
-   console.log({
-  url: request.url,
-  host: request.headers.get("host"),
-  forwardedHost: request.headers.get("x-forwarded-host"),
-  forwardedProto: request.headers.get("x-forwarded-proto"),
-});
+  console.log({
+    url: request.url,
+    host: request.headers.get("host"),
+    forwardedHost: request.headers.get("x-forwarded-host"),
+    forwardedProto: request.headers.get("x-forwarded-proto"),
+  });
+
+  const baseUrl =
+    process.env.APP_URL ??
+    `https://${request.headers.get("x-forwarded-host") ?? request.headers.get("host")}`;
+
   const accessId = request.nextUrl.searchParams.get("accessid");
 
   if (!accessId) {
-    return NextResponse.redirect(new URL("/login?error=missing_accessid", request.url));
+    return NextResponse.redirect(
+      new URL("/login?error=missing_accessid", baseUrl)
+    );
   }
 
   try {
@@ -48,7 +56,10 @@ export async function GET(request: NextRequest) {
       isVerified: user.isVerified,
     });
 
-    const response = NextResponse.redirect(new URL("/dashboard", request.url));
+    const response = NextResponse.redirect(
+      new URL("/dashboard", baseUrl)
+    );
+
     response.cookies.set(sessionCookieName(), sessionToken, {
       httpOnly: true,
       sameSite: "lax",
@@ -58,7 +69,11 @@ export async function GET(request: NextRequest) {
     });
 
     return response;
-  } catch {
-    return NextResponse.redirect(new URL("/login?error=sso_failed", request.url));
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.redirect(
+      new URL("/login?error=sso_failed", baseUrl)
+    );
   }
 }
