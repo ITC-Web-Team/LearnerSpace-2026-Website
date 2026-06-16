@@ -7,7 +7,7 @@ export type SsoUser = {
 };
 
 export async function fetchSsoUser(accessId: string) {
-  const response = await fetch("https://sso.tech-iitb.org/project/getuserdata", {
+  const response = await fetch("http://sso.tech-iitb.org/project/getuserdata", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
