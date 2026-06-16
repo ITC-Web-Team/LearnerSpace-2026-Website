@@ -55,7 +55,10 @@ export async function GET(request: NextRequest) {
       branch: user.branch,
       isVerified: user.isVerified,
     });
-
+    console.log(
+  "Redirecting to:",
+  new URL("/dashboard", baseUrl).toString()
+)
     const response = NextResponse.redirect(
       new URL("/dashboard", baseUrl)
     );
