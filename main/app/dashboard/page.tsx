@@ -124,7 +124,6 @@ export default async function DashboardPage() {
         </section>
 
         <div className="mt-6">
-          <LoginButton />
         </div>
       </div>
     </main>
