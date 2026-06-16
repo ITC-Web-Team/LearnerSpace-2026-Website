@@ -5,7 +5,24 @@ import { prisma } from "@/lib/prisma";
 import { sessionCookieName, verifySessionToken } from "@/lib/session";
 
 const weekCards = [1, 2, 3, 4] as const;
-
+const weekResources = {
+  1: {
+    title: "Week 1 Resources",
+    link: "https://example.com/week1",
+  },
+  2: {
+    title: "Week 2 Resources",
+    link: "https://example.com/week2",
+  },
+  3: {
+    title: "Week 3 Resources",
+    link: "https://example.com/week3",
+  },
+  4: {
+    title: "Week 4 Resources",
+    link: "https://example.com/week4",
+  },
+} as const;
 function getWeekStatus(submission: Awaited<ReturnType<typeof prisma.submission.findUnique>>, week: 1 | 2 | 3 | 4) {
   if (!submission) {
     return false;
@@ -68,9 +85,20 @@ export default async function DashboardPage() {
                     {verified ? "Verified" : "Pending"}
                   </span>
                 </div>
-                <div className="mt-4 flex min-h-40 items-center justify-center rounded-[1.35rem] border border-dashed border-[#dac7a2] bg-white px-4 text-center text-sm leading-6 text-[#7d6d56]">
-                  Instructor resources placeholder for Week {week}.
-                </div>
+                <div className="mt-4 flex min-h-40 flex-col items-center justify-center rounded-[1.35rem] border border-dashed border-[#dac7a2] bg-white px-4 text-center">
+  <p className="mb-4 text-sm text-[#7d6d56]">
+    {weekResources[week].title}
+  </p>
+
+  <a
+    href={weekResources[week].link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="rounded-full bg-[#3d3427] px-4 py-2 text-sm font-medium text-[#f7f0e1] hover:bg-[#554530]"
+  >
+    Open Resources
+  </a>
+</div>
               </article>
             );
           })}
