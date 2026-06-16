@@ -94,7 +94,7 @@ export default async function DashboardPage() {
     href={weekResources[week].link}
     target="_blank"
     rel="noopener noreferrer"
-    className="rounded-full bg-[#ffffff] px-4 py-2 text-sm font-medium text-[#f7f0e1] hover:bg-[#e4bd8a]"
+    className="rounded-full bg-[#eccda4] px-4 py-2 text-sm font-medium text-[#f7f0e1] hover:bg-[#e8b573]"
   >
     Open Resources
   </a>
