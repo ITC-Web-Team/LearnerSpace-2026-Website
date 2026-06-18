@@ -32,7 +32,7 @@ export default function SubmissionForm({ initialSubmission, user }: Props) {
     [initialSubmission],
   );
 
-  const locked = Boolean(initialSubmission?.repositoryLink && initialSubmission.repositoryLink !== repositoryLink);
+  const locked = Boolean(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
