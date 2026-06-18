@@ -85,7 +85,7 @@ export default function SubmissionForm({ initialSubmission, user }: Props) {
             {initialSubmission?.repositoryLink ? "Update link" : "Submit link"}
           </button>
           <p className="text-sm text-[#75644f]">
-            {initialSubmission?.repositoryLink ? "The current link is stored for the full 4-week cycle." : "You can save the link once after validation."}
+            {initialSubmission?.repositoryLink ? "The current link is stored for the full 4-week cycle." : "Updated"}
           </p>
         </div>
       </form>
