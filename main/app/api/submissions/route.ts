@@ -42,10 +42,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Submission record not found." }, { status: 404 });
   }
 
-  if (existing.repositoryLink && existing.repositoryLink !== repositoryLink) {
-    return NextResponse.json({ message: "Repository link can only be submitted once." }, { status: 409 });
-  }
-
   const submission = await prisma.submission.update({
     where: { rollNo: session.rollNo },
     data: { repositoryLink },
